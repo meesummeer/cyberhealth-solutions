@@ -1,0 +1,278 @@
+/* ============================================
+   CyberHealth Solutions — design tokens
+   Color:  ink #16232E · paper #F1F3F1 · accent #3D6B7D
+           muted #5B6660 · rule #D8DBD6
+   Type:   Source Serif 4 (display) / IBM Plex Sans (body, ui)
+   Layout: left-aligned, asymmetric, ledger-style record rows
+   ============================================ */
+
+:root {
+  --ink: #16232E;
+  --paper: #F1F3F1;
+  --paper-raised: #E8EBE7;
+  --accent: #3D6B7D;
+  --muted: #5B6660;
+  --rule: #D8DBD6;
+
+  --font-display: 'Source Serif 4', Georgia, serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --wrap-width: 1080px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--wrap-width);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+a:hover, a:focus-visible { border-bottom-color: currentColor; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--ink);
+}
+
+p { margin: 0; }
+
+/* ---------- header ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.site-nav a {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding: 100px 0 90px;
+}
+
+.hero-inner {
+  max-width: 760px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  letter-spacing: -0.01em;
+  max-width: 16ch;
+}
+
+.hero-sub {
+  margin-top: 28px;
+  max-width: 58ch;
+  font-size: 19px;
+  color: var(--muted);
+}
+
+.hero-founder {
+  margin-top: 22px;
+  font-size: 14px;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  max-width: 48ch;
+}
+
+/* ---------- services ---------- */
+
+.services {
+  padding: 80px 0;
+  background: var(--paper-raised);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.services h2 {
+  font-size: 28px;
+  margin-bottom: 44px;
+}
+
+.service-list {
+  display: grid;
+  gap: 0;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding: 26px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.service-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.service-row h3 {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.service-row p {
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+/* ---------- work / records ---------- */
+
+.work {
+  padding: 90px 0;
+}
+
+.work h2 {
+  font-size: 28px;
+  margin-bottom: 44px;
+}
+
+.record-list {
+  display: grid;
+  gap: 0;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  padding: 30px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.record:last-child { border-bottom: 1px solid var(--rule); }
+
+.record-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.record-type {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.record-loc {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.record-body h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.record-body p {
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  padding: 90px 0 110px;
+  border-top: 1px solid var(--rule);
+}
+
+.contact h2 {
+  font-size: 30px;
+  max-width: 20ch;
+}
+
+.contact p {
+  margin-top: 18px;
+  max-width: 52ch;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.contact-link {
+  display: inline-block;
+  margin-top: 26px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  padding: 26px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+  .wrap { padding: 0 20px; }
+  .hero { padding: 64px 0 56px; }
+  .service-row,
+  .record {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .site-nav { gap: 20px; }
+}
