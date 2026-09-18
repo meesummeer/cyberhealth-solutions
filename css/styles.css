@@ -2,6 +2,8 @@
    CyberHealth Solutions — design tokens
    Color:  ink #16232E · paper #F1F3F1 · teal #3D6B7D · gold #C89B3C
            muted #5B6660 · rule #D8DBD6
+   Dark-page tokens: muted-dark / hairline / veil for text & panels that
+   sit directly on the site-wide dark gradient (see body{}).
    Type:   Source Serif 4 (display) / IBM Plex Sans (body, ui)
    Layout: left-aligned, asymmetric, ledger-style record rows
    ============================================ */
@@ -12,12 +14,17 @@
   --paper: #F1F3F1;
   --paper-raised: #E8EBE7;
   --accent: #3D6B7D;
+  --accent-bright: #7FB0C4;
   --accent-soft: rgba(61, 107, 125, 0.14);
   --gold: #C89B3C;
   --gold-soft: rgba(200, 155, 60, 0.16);
   --gold-dim: #8C6B2A;
   --muted: #5B6660;
+  --muted-dark: rgba(241, 243, 241, 0.66);
   --rule: #D8DBD6;
+  --hairline: rgba(241, 243, 241, 0.14);
+  --veil: rgba(241, 243, 241, 0.05);
+  --veil-gold: rgba(200, 155, 60, 0.13);
 
   --font-display: 'Source Serif 4', Georgia, serif;
   --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -33,7 +40,8 @@ html { scroll-behavior: smooth; }
   html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 
-  /* Hero heartbeat → circuit: skip straight to the static circuit end-state. */
+  /* Hero heartbeat → circuit: skip straight to the static circuit end-state,
+     with no ongoing ambient loop. */
   .hero-pulse,
   .hero-dot,
   .hero-line {
@@ -54,12 +62,24 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  color: var(--paper);
   font-family: var(--font-body);
   font-size: 17px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+
+  /* Full-page dark gradient (previously hero-only), with a few soft
+     glows — teal, gold, and plain light — so it reads as atmosphere
+     rather than one flat dark slab. */
+  background-image:
+    radial-gradient(rgba(241, 243, 241, 0.07) 1px, transparent 1.4px),
+    radial-gradient(700px 520px at 88% 3%, rgba(61, 107, 125, 0.30), transparent 60%),
+    radial-gradient(520px 420px at 5% 28%, rgba(241, 243, 241, 0.055), transparent 65%),
+    radial-gradient(620px 480px at 94% 56%, rgba(200, 155, 60, 0.10), transparent 65%),
+    radial-gradient(520px 420px at 8% 90%, rgba(241, 243, 241, 0.05), transparent 65%),
+    linear-gradient(180deg, var(--ink-deep) 0%, var(--ink) 28%, #16232E 55%, #14202A 78%, var(--ink-deep) 100%);
+  background-size: 26px 26px, auto, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
 .wrap {
@@ -69,20 +89,20 @@ body {
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-bright);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.15s ease;
 }
 a:hover, a:focus-visible { border-bottom-color: currentColor; }
-a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
 h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.15;
   margin: 0;
-  color: var(--ink);
+  color: var(--paper);
 }
 
 p { margin: 0; }
@@ -90,8 +110,7 @@ p { margin: 0; }
 /* ---------- header ---------- */
 
 .site-header {
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
   position: relative;
   z-index: 20;
 }
@@ -124,7 +143,7 @@ p { margin: 0; }
   font-family: var(--font-display);
   font-size: 19px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .site-nav {
@@ -133,7 +152,7 @@ p { margin: 0; }
 }
 
 .site-nav a {
-  color: var(--muted);
+  color: var(--muted-dark);
   font-size: 15px;
 }
 
@@ -143,37 +162,26 @@ p { margin: 0; }
   position: relative;
   overflow: hidden;
   padding: 96px 0;
+  /* Extra local glow on top of the body-wide gradient, centered on the
+     (now larger) animation. */
   background:
-    radial-gradient(560px 420px at 82% 30%, rgba(61, 107, 125, 0.35), transparent 65%),
-    radial-gradient(420px 320px at 100% 90%, rgba(200, 155, 60, 0.16), transparent 70%),
-    linear-gradient(160deg, var(--ink-deep) 0%, var(--ink) 55%, #1B2E38 100%);
-  color: var(--paper);
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.5;
-  background-image: radial-gradient(rgba(241, 243, 241, 0.10) 1px, transparent 1.4px);
-  background-size: 26px 26px;
-  pointer-events: none;
+    radial-gradient(620px 460px at 84% 38%, rgba(61, 107, 125, 0.28), transparent 65%),
+    radial-gradient(420px 340px at 100% 92%, rgba(200, 155, 60, 0.14), transparent 70%);
 }
 
 .hero-inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  gap: 56px;
   align-items: center;
 }
 
-.hero-copy { max-width: 620px; }
+.hero-copy { max-width: 600px; }
 
 .hero h1 {
   font-size: clamp(34px, 5vw, 54px);
   letter-spacing: -0.01em;
-  color: var(--paper);
   max-width: 14ch;
 }
 
@@ -181,7 +189,7 @@ p { margin: 0; }
   margin-top: 26px;
   max-width: 52ch;
   font-size: 18px;
-  color: rgba(241, 243, 241, 0.78);
+  color: var(--muted-dark);
 }
 
 .hero-animation {
@@ -191,10 +199,18 @@ p { margin: 0; }
 
 .hero-animation svg { width: 100%; height: auto; display: block; }
 
-/* Hero heartbeat → circuit: a fixed load-once sequence, not a repeating loop. */
+/* Hero heartbeat → circuit: plays once on load, then settles into a
+   slow, low-amplitude ambient loop — a periodic heartbeat and a gentle
+   drift on the circuit dots/lines. Calm background motion, not a repeat
+   of the intro. */
 .hero-pulse {
   transform-origin: 100px 94px;
-  animation: hero-heartbeat 1.4s ease-in-out 2 both;
+  animation-name: hero-heartbeat, hero-heartbeat-ambient;
+  animation-duration: 1.4s, 6.5s;
+  animation-timing-function: ease-in-out, ease-in-out;
+  animation-iteration-count: 2, infinite;
+  animation-delay: 0s, 2.8s;
+  animation-fill-mode: both, both;
 }
 
 @keyframes hero-heartbeat {
@@ -205,16 +221,34 @@ p { margin: 0; }
   46% { transform: scale(1); }
 }
 
+/* Long, mostly-flat cycle with one small, subtle "thump" — periodic,
+   not constant undulation. */
+@keyframes hero-heartbeat-ambient {
+  0%, 78%, 100% { transform: scale(1); }
+  86% { transform: scale(1.032); }
+  92% { transform: scale(0.997); }
+}
+
 .hero-dot {
   fill: var(--accent);
   transform: translate(var(--dx), var(--dy));
-  animation: hero-dot-morph 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-  animation-delay: calc(2.6s + (var(--i, 0) * 0.025s));
+  animation-name: hero-dot-morph, hero-dot-ambient;
+  animation-duration: 0.9s, 4.5s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1), ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-delay: calc(2.6s + (var(--i, 0) * 0.025s)), calc(3.5s + (var(--i, 0) * 0.025s));
+  animation-fill-mode: forwards, both;
 }
 
 @keyframes hero-dot-morph {
   from { transform: translate(var(--dx), var(--dy)); }
   to { transform: translate(0, 0); }
+}
+
+/* Ambient: a gentle brightness drift once each dot has settled into place. */
+@keyframes hero-dot-ambient {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.68; }
 }
 
 .hero-line {
@@ -225,8 +259,12 @@ p { margin: 0; }
   opacity: 0;
   stroke-dasharray: 300;
   stroke-dashoffset: 300;
-  animation: hero-line-draw 0.8s ease-out forwards;
-  animation-delay: calc(3.5s + (var(--i, 0) * 0.03s));
+  animation-name: hero-line-draw, hero-line-pulse;
+  animation-duration: 0.8s, 5s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-iteration-count: 1, infinite;
+  animation-delay: calc(3.5s + (var(--i, 0) * 0.03s)), calc(4.3s + (var(--i, 0) * 0.03s));
+  animation-fill-mode: forwards, both;
 }
 
 @keyframes hero-line-draw {
@@ -235,13 +273,21 @@ p { margin: 0; }
   100% { opacity: 1; stroke-dashoffset: 0; }
 }
 
+/* Ambient: connections gently pulse, like a signal still moving through
+   the circuit. */
+@keyframes hero-line-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* ---------- services ---------- */
 
 .services {
+  position: relative;
   padding: 80px 0;
-  background: var(--paper-raised);
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  background: radial-gradient(560px 340px at 6% 6%, rgba(241, 243, 241, 0.06), transparent 65%);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .services h2 {
@@ -259,14 +305,15 @@ p { margin: 0; }
   align-items: center;
   gap: 32px;
   padding: 28px 32px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
+  background: var(--veil);
 }
 
-.service-banner:last-child { border-bottom: 1px solid var(--rule); }
+.service-banner:last-child { border-bottom: 1px solid var(--hairline); }
 
 .service-banner:nth-child(even) {
   flex-direction: row-reverse;
-  background: var(--gold-soft);
+  background: var(--veil-gold);
 }
 
 .service-icon {
@@ -277,13 +324,14 @@ p { margin: 0; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-soft);
+  background: var(--paper-raised);
+  border: 1.5px solid var(--accent);
   color: var(--accent);
   animation: icon-breathe 3.4s ease-in-out infinite;
 }
 
 .service-banner:nth-child(even) .service-icon {
-  background: var(--gold-soft);
+  border-color: var(--gold);
   color: var(--gold-dim);
 }
 
@@ -304,14 +352,16 @@ p { margin: 0; }
 
 .service-copy p {
   margin-top: 6px;
-  color: var(--muted);
+  color: var(--muted-dark);
   max-width: 58ch;
 }
 
 /* ---------- work / trusted partners ---------- */
 
 .work {
+  position: relative;
   padding: 90px 0;
+  background: radial-gradient(560px 360px at 94% 12%, rgba(200, 155, 60, 0.09), transparent 65%);
 }
 
 .work h2 {
@@ -321,16 +371,20 @@ p { margin: 0; }
 .work .section-sub {
   margin-top: 10px;
   margin-bottom: 40px;
-  color: var(--muted);
+  color: var(--muted-dark);
   font-size: 15px;
 }
 
 .partner-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
+  margin-top: 40px;
 }
 
+/* Partner badges stay light plaques — a deliberate light accent against
+   the dark page, so no text-color changes needed inside them. */
 .partner-badge {
   position: relative;
   padding: 26px 24px 22px;
@@ -351,7 +405,7 @@ p { margin: 0; }
 
 .partner-badge:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(22, 35, 46, 0.08);
+  box-shadow: 0 14px 28px rgba(13, 21, 28, 0.35);
 }
 
 .partner-name {
@@ -372,7 +426,7 @@ p { margin: 0; }
 
 .contact {
   padding: 90px 0 110px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .contact h2 {
@@ -383,7 +437,7 @@ p { margin: 0; }
 .contact p {
   margin-top: 18px;
   max-width: 52ch;
-  color: var(--muted);
+  color: var(--muted-dark);
   font-size: 18px;
 }
 
@@ -392,14 +446,14 @@ p { margin: 0; }
   margin-top: 26px;
   font-family: var(--font-display);
   font-size: 20px;
-  color: var(--ink);
+  color: var(--paper);
   border-bottom: 1px solid var(--gold);
 }
 
 /* ---------- footer ---------- */
 
 .site-footer {
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--hairline);
 }
 
 .footer-inner {
@@ -407,13 +461,15 @@ p { margin: 0; }
   justify-content: space-between;
   padding: 26px 0;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 
 /* ---------- team page ---------- */
 
 .team {
+  position: relative;
   padding: 90px 0 110px;
+  background: radial-gradient(520px 340px at 88% 8%, rgba(61, 107, 125, 0.12), transparent 65%);
 }
 
 .team h2 {
@@ -422,6 +478,7 @@ p { margin: 0; }
 }
 
 .team-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 36px;
@@ -432,6 +489,8 @@ p { margin: 0; }
   text-align: center;
 }
 
+/* Avatars stay light discs — the same "light accent on dark page"
+   treatment as the partner badges and service icons. */
 .team-avatar {
   width: 96px;
   height: 96px;
@@ -461,16 +520,18 @@ p { margin: 0; }
   font-family: var(--font-display);
   font-size: 19px;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--paper);
 }
 
 .team-title {
   margin-top: 4px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--muted-dark);
 }
 
 /* ---------- mascot widget ---------- */
+/* A self-contained light popover — intentionally unchanged by the
+   page-wide dark theme, like a system dialog. */
 
 .mascot-widget {
   position: fixed;
@@ -490,7 +551,7 @@ p { margin: 0; }
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 24px rgba(22, 35, 46, 0.28);
+  box-shadow: 0 10px 24px rgba(13, 21, 28, 0.45);
   animation: mascot-breathe 3.2s ease-in-out infinite;
 }
 
@@ -500,7 +561,7 @@ p { margin: 0; }
 .mascot-button:focus-visible {
   animation-play-state: paused;
   outline: none;
-  box-shadow: 0 12px 28px rgba(22, 35, 46, 0.34);
+  box-shadow: 0 12px 28px rgba(13, 21, 28, 0.5);
 }
 
 @keyframes mascot-breathe {
@@ -515,7 +576,7 @@ p { margin: 0; }
   width: min(320px, calc(100vw - 44px));
   background: var(--paper);
   border: 1px solid var(--rule);
-  box-shadow: 0 18px 40px rgba(22, 35, 46, 0.22);
+  box-shadow: 0 18px 40px rgba(13, 21, 28, 0.4);
   padding: 18px;
 }
 
@@ -532,6 +593,7 @@ p { margin: 0; }
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 16px;
+  color: var(--ink);
 }
 
 .mascot-close {
@@ -592,7 +654,7 @@ p { margin: 0; }
 
 @media (max-width: 860px) {
   .hero-inner { grid-template-columns: 1fr; }
-  .hero-animation { max-width: 260px; margin-top: 40px; }
+  .hero-animation { max-width: 380px; margin-top: 40px; }
 }
 
 @media (max-width: 720px) {
