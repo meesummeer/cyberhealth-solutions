@@ -133,10 +133,9 @@ p { margin: 0; }
 .wordmark:hover, .wordmark:focus-visible { border-bottom: none; }
 
 .logo-mark {
-  width: 32px;
-  height: 32px;
+  height: 34px;
+  width: auto;
   flex-shrink: 0;
-  border-radius: 50%;
 }
 
 .wordmark-text {
@@ -154,6 +153,86 @@ p { margin: 0; }
 .site-nav a {
   color: var(--muted-dark);
   font-size: 15px;
+}
+
+/* ---------- marquee ---------- */
+
+.marquee {
+  position: sticky;
+  top: 0;
+  z-index: 15;
+  overflow: hidden;
+  background: var(--gold);
+  color: var(--ink);
+  padding: 9px 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee-scroll 34s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.marquee-item {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0 18px;
+}
+
+.marquee-dot {
+  width: 4px;
+  height: 4px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--ink);
+  opacity: 0.55;
+}
+
+/* Visually hidden by default — screen readers get one clean line instead
+   of the duplicated, auto-scrolling track (which is aria-hidden). */
+.marquee-static {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { display: none; }
+  .marquee-static {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0 24px;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    font-size: 13px;
+    font-weight: 500;
+  }
 }
 
 /* ---------- hero ---------- */
