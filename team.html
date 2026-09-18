@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet the Team — CyberHealth Solutions</title>
+<meta name="description" content="The team behind CyberHealth Solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="/" class="wordmark">
+      <img class="logo-mark" src="assets/logo.svg" alt="CyberHealth Solutions logo">
+      <span class="wordmark-text">CyberHealth Solutions</span>
+    </a>
+    <nav class="site-nav">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#work">Work</a>
+      <a href="team.html">Team</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="team">
+    <div class="wrap">
+      <h2>Meet the team</h2>
+      <div class="team-grid">
+
+        <div class="team-card">
+          <svg class="team-avatar team-avatar--teal" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="avatar-bg" cx="32" cy="32" r="29"/>
+            <circle class="avatar-head" cx="32" cy="25" r="10"/>
+            <path class="avatar-body" d="M13 54c2.5-11 10-17.5 19-17.5S49.5 43 51 54"/>
+          </svg>
+          <div class="team-name">Meesum</div>
+          <div class="team-title">Founder &amp; CEO</div>
+        </div>
+
+        <div class="team-card">
+          <svg class="team-avatar team-avatar--gold" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="avatar-bg" cx="32" cy="32" r="29"/>
+            <circle class="avatar-head" cx="32" cy="25" r="10"/>
+            <path class="avatar-body" d="M13 54c2.5-11 10-17.5 19-17.5S49.5 43 51 54"/>
+          </svg>
+          <div class="team-name">Rizvi</div>
+          <div class="team-title">Founder &amp; COO</div>
+        </div>
+
+        <div class="team-card">
+          <svg class="team-avatar team-avatar--teal" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="avatar-bg" cx="32" cy="32" r="29"/>
+            <circle class="avatar-head" cx="32" cy="25" r="10"/>
+            <path class="avatar-body" d="M13 54c2.5-11 10-17.5 19-17.5S49.5 43 51 54"/>
+          </svg>
+          <div class="team-name">Chris</div>
+          <div class="team-title">CFO, CPO &amp; CCO</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <span>© 2026 CyberHealth Solutions</span>
+    <span>Karachi, Pakistan</span>
+  </div>
+</footer>
+
+<div class="mascot-widget">
+  <button type="button" class="mascot-button" id="mascotToggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="mascotPanel" aria-label="Open chat with CyberHealth Solutions">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4V5z"/><path d="M7 10h2l1.5-2.5L13 13l1.5-3H17"/></svg>
+  </button>
+  <div class="mascot-panel" id="mascotPanel" role="dialog" aria-labelledby="mascotPanelTitle" hidden>
+    <div class="mascot-panel-head">
+      <span id="mascotPanelTitle">Send us a message</span>
+      <button type="button" class="mascot-close" id="mascotClose" aria-label="Close">×</button>
+    </div>
+    <form class="mascot-form" id="mascotForm">
+      <div>
+        <label for="mascotName">Name</label>
+        <input type="text" id="mascotName" name="name" required>
+      </div>
+      <div>
+        <label for="mascotEmail">Email</label>
+        <input type="email" id="mascotEmail" name="email" required>
+      </div>
+      <div>
+        <label for="mascotMessage">Message</label>
+        <textarea id="mascotMessage" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="mascot-submit">Send via email</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/mascot.js"></script>
+</body>
+</html>
